@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('foto_firma')->nullable();
             $table->string('foto_perfil')->nullable();
             $table->string('foto_huella')->nullable();
-            $table->boolean('tipo_trabajador')->default(0); // OBLIGATORIO
+            $table->boolean('tipo_usuario')->default(0); // OBLIGATORIO
             $table->boolean('status')->default(1); // OBLIGATORIO
 
             $table->unsignedBigInteger('place_id')->nullable();

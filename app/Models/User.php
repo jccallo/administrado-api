@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // tipos de usuarios
+    const EXTERNO_USER = 2; // usuario externo
+    const PERMANENTE_USER = 1; // usuario permanente
+    const REGULAR_USER = 0; // usuario normal
+
     /**
      * The attributes that are mass assignable.
      *
