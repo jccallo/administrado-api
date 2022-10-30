@@ -19,7 +19,7 @@ return new class extends Migration
                                          // duda con poner unique a este campo
             $table->text('descripcion'); // OBLIGATORIO
             $table->date('fecha')->nullable();
-            $table->boolean('status')->default(1); // 0: inactivo 1: activo
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
 
             $table->unsignedBigInteger('place_id')->nullable();
             $table->foreign('place_id')->references('id')->on('places')->onDelete('set null');

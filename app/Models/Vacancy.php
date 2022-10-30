@@ -15,4 +15,9 @@ class Vacancy extends Model
         'fecha_fin',
         'status',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

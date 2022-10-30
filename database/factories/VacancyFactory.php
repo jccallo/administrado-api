@@ -20,7 +20,7 @@ class VacancyFactory extends Factory
             'descripcion' => $this->faker->sentence(),
             'fecha_inicio' => $this->faker->date(),
             'fecha_fin' => $this->faker->date(),
-            'status' => $this->faker->randomElement([1, 0]),
+            'status' => $this->faker->randomElement(['activo', 'inactivo']),
         ];
     }
 }

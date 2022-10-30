@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->boolean('estado_respuesta')->default(0); 
-            $table->boolean('status')->default(0);
+            $table->enum('estado_respuesta', ['aceptado', 'pendiente', 'rechazado'])->default('pendiente');
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
 
             $table->unsignedBigInteger('friend_id')->nullable();
             $table->foreign('friend_id')->references('id')->on('friends')->onDelete('set null');

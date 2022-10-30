@@ -17,9 +17,14 @@ class Friend extends Model
         'status',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function users()
     {
         // modelo de la segunda tabla, [nombre de la tabla intermedia, fk de la primera tabla, fk de la segunda tabla]
-        return $this->belongsToMany(User::class, 'user_has_family', 'friend_id', 'user_id');
+        return $this->belongsToMany(User::class, 'families', 'friend_id', 'user_id');
     }
 }

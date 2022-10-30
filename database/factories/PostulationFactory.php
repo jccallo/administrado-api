@@ -17,8 +17,8 @@ class PostulationFactory extends Factory
     public function definition()
     {
         return [
-            'estado_postulacion' => $this->faker->randomElement([2, 1, 0]),
-            'status' => $this->faker->randomElement([1, 0]),
+            'estado_postulacion' => $this->faker->randomElement(['aceptado', 'pendiente', 'rechazado']),
+            'status' => $this->faker->randomElement(['activo', 'inactivo']),
             'vacancy_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
             'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
         ];

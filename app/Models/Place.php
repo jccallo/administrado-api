@@ -10,8 +10,8 @@ class Place extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
-        'status',
+        'nombre', // OBLIGATORIO
+        'status', // default
     ];
 
     public function users()

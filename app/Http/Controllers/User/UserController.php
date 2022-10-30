@@ -3,64 +3,51 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\User\UserResource;
 use App\Models\Place;
 use App\Models\User;
-use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
 class UserController extends ApiController
 {
     public function index()
     {
-        $users = User::orderByDesc('id')->get();
-        return $this->showAll($users);
-    }
-
-    public function create()
-    {
-        $places = Place::pluck('nombre', 'id');
-        return var_dump([
-            'ok' => true,
-            'places' => $places,
-        ]);
+        $data = User::orderByDesc('id')->get();
+        return UserResource::collection($data);
     }
 
     public function store(Request $request)
     {
-        $user = User::create($request->all());
-        return $this->showOne($user);
+        $user = $request->except(['family']); // datos de usuario
+        $relationships = $request->get('relationships'); // familia
+        $recommenders = $request->get('recommenders'); // recomendados
+
+        $user = User::create($user);
+        $user->relationships()->sync($relationships);
+        $user->recommenders()->sync($recommenders);
+
+        $data = new UserResource($user);
+        return $data;
 
     }
 
     public function show(User $user)
     {
-        $places = Place::pluck('nombre', 'id');
-        $familyNames = $user->friends()->pluck('nombre', 'id');
-        // return var_dump(compact('places'));
-        return $this->showResponse(compact('places', 'familyNames'));
-        // return response()->json([
-        //     'ok' => true,
-        //     'user' => $user,
-        //     'places' => $places,
-        //     'familyNames' => $familyNames,
-        // ], 200);
+        $data = new UserResource($user);
+        return $data;
     }
 
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
-        return response()->json([
-            'ok' => true,
-            'user' => $user,
-        ], 200);
+        $data = new UserResource($user);
+        return $data;
     }
 
     public function destroy(User $user)
     {
-        $user->update(['state' => 0]);
-        return response()->json([
-            'ok' => true,
-            'user' => $user,
-        ], 200);
+        $user->update(['status' => 'inactivo']);
+        $data = new UserResource($user);
+        return $data;
     }
 }

@@ -16,30 +16,30 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // OBLIGATORIO
-            $table->string('email')->unique()->nullable(); // se puso que puede aceptar null
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('email')->unique()->nullable(); // null
+            $table->timestamp('email_verified_at')->nullable(); // null
+            $table->string('password')->nullable(); // null
+            $table->rememberToken(); // null
+            $table->timestamps(); // null
 
-            $table->string('dni')->unique()->nullable();
-            $table->string('telefono')->unique()->nullable();
-            $table->date('fecha_nacimiento')->nullable();
-            $table->string('talla_overol')->nullable();
-            $table->integer('talla_zapato')->nullable();
-            $table->decimal('talla', 10, 2)->nullable(); // para evitar errores se define de manera general
-            $table->decimal('peso', 10, 2)->nullable(); // para evitar errores se define de manera general
-            $table->string('direccion')->nullable();
-            $table->text('observacion')->nullable();
-            $table->decimal('sueldo_dia', 10, 2)->nullable();
-            $table->decimal('sueldo_mes', 10, 2)->nullable();
-            $table->string('foto_firma')->nullable();
-            $table->string('foto_perfil')->nullable();
-            $table->string('foto_huella')->nullable();
-            $table->boolean('tipo_usuario')->default(0); // OBLIGATORIO
-            $table->boolean('status')->default(1); // OBLIGATORIO
+            $table->string('dni')->unique()->nullable(); // null
+            $table->string('telefono')->unique()->nullable(); // null
+            $table->date('fecha_nacimiento')->nullable(); // null
+            $table->string('talla_overol')->nullable(); // null
+            $table->integer('talla_zapato')->nullable(); // null
+            $table->decimal('talla', 10, 2)->nullable(); // null
+            $table->decimal('peso', 10, 2)->nullable(); // null
+            $table->string('direccion')->nullable(); // null
+            $table->text('observacion')->nullable(); // null
+            $table->decimal('sueldo_dia', 10, 2)->nullable(); // null
+            $table->decimal('sueldo_mes', 10, 2)->nullable(); // null
+            $table->string('foto_firma')->nullable(); // null
+            $table->string('foto_perfil')->nullable(); // null
+            $table->string('foto_huella')->nullable(); // null
+            $table->enum('tipo_usuario', ['externo', 'permamente', 'otros'])->default('otros'); // default
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
 
-            $table->unsignedBigInteger('place_id')->nullable();
+            $table->unsignedBigInteger('place_id')->nullable(); // null
             $table->foreign('place_id')->references('id')->on('places')->onDelete('set null');
         });
     }

@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('job_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('job_id')->nullable();
-            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('set null');
+            $table->unsignedBigInteger('job_id');
+            $table->foreign('job_id')->references('id')->on('jobs');
 
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

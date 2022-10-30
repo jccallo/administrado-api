@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Friend\FriendController;
+use App\Http\Controllers\Place\PlaceController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Vacancy\VacancyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +22,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->except('edit');
+Route::resource('places', PlaceController::class)->except('create', 'edit');
+Route::resource('vacancies', VacancyController::class)->except('create', 'edit');
+Route::resource('friends', FriendController::class)->except('create', 'edit');

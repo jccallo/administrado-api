@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -39,8 +38,8 @@ class UserFactory extends Factory
             'foto_firma' => ($this->faker->ean13()).'.jpg',
             'foto_perfil' => ($this->faker->ean13()).'.jpg',
             'foto_huella' => ($this->faker->ean13()).'.jpg',
-            'tipo_trabajador' => $this->faker->randomElement([User::REGULAR_USER, User::PERMANENTE_USER, User::EXTERNO_USER]),
-            'status' => $this->faker->randomElement([1, 0]),
+            'tipo_usuario' => $this->faker->randomElement(['externo', 'permamente', 'otros']),
+            'status' => $this->faker->randomElement(['activo', 'inactivo']),
             'place_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
         ];
     }

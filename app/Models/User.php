@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,38 +13,32 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // tipos de usuarios
-    const EXTERNO_USER = 2; // usuario externo
-    const PERMANENTE_USER = 1; // usuario permanente
-    const REGULAR_USER = 0; // usuario normal
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-
-        'dni',
-        'telefono',
-        'fecha_nacimiento',
-        'talla_overol',
-        'talla_zapato',
-        'talla',
-        'peso',
-        'direccion',
-        'observacion',
-        'sueldo_dia',
-        'sueldo_mes',
-        'foto_firma',
-        'foto_perfil',
-        'foto_huella',
-        'tipo_trabajador',
-        'status',
-        'place_id',
+        'name', // OBLIGATORIO
+        'email', // null
+        'password', // null
+        'dni', // null
+        'telefono', // null
+        'fecha_nacimiento', // null
+        'talla_overol', // null
+        'talla_zapato', // null
+        'talla', // null
+        'peso', // null
+        'direccion', // null
+        'observacion', // null
+        'sueldo_dia', // null
+        'sueldo_mes', // null
+        'foto_firma', // null
+        'foto_perfil', // null
+        'foto_huella', // null
+        'tipo_usuario', // default
+        'status', // default
+        'place_id', // null
     ];
 
     /**
@@ -69,24 +64,51 @@ class User extends Authenticatable
 
     public function place()
     {
-        // modelo de la tabla padre (brand), [fk en la tabla hija (product), pk de la tabla padre (brand)]
         return $this->belongsTo(Place::class, 'place_id', 'id');
     }
 
-    public function friends()
+    public function relationships()
     {
-        // modelo de la segunda tabla, [nombre de la tabla intermedia, fk de la primera tabla, fk de la segunda tabla]
-        return $this->belongsToMany(Friend::class, 'user_has_family', 'user_id', 'friend_id')->withPivot('parentesco');
+        return $this->belongsToMany(Friend::class, 'relationships', 'user_id', 'friend_id')
+            ->withPivot('parentesco');
+    }
+
+    public function recommenders()
+    {
+        return $this->belongsToMany(Friend::class, 'recommenders', 'user_id', 'friend_id')
+            ->withPivot('tipo');
     }
 
     /* --------------------------------- metodos -------------------------------- */
 
-    public function getFamilyByName()
+    public function getPlaceName()
     {
-        $familyNames = [];
-        foreach ($this->friends as $friend) {
-            array_push($familyNames, $friend->id);
+        return isset($this->place) ? $this->place->nombre : null;
+    }
+
+    public function getRelationships()
+    {
+        $relationships = collect();
+        foreach ($this->relationships as $relationship) {
+            $relationships->push([
+                'id' => $relationship->id,
+                'nombre' => $relationship->nombre,
+                'parentesco' => $relationship->pivot->parentesco,
+            ]);
         }
-        $familyNames = collect($familyNames);
+        return $relationships->count() > 0 ? $relationships : null;
+    }
+
+    public function getRecommenders()
+    {
+        $recommenders = collect();
+        foreach ($this->recommenders as $recommender) {
+            $recommenders->push([
+                'id' => $recommender->id,
+                'nombre' => $recommender->nombre,
+                'tipo' => $recommender->pivot->tipo,
+            ]);
+        }
+        return $recommenders->count() > 0 ? $recommenders : null;
     }
 }

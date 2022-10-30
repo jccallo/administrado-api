@@ -18,7 +18,7 @@ class PlaceFactory extends Factory
     {
         return [
             'nombre' => $this->faker->unique()->city(),
-            'status' => $this->faker->randomElement([1, 0]),
+            'status' => $this->faker->randomElement(['activo', 'inactivo']),
         ];
     }
 }

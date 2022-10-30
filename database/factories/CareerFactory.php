@@ -18,8 +18,8 @@ class CareerFactory extends Factory
     {
         return [
             'nombre' => $this->faker->unique()->word(),
-            'tipo_carrera' => $this->faker->randomElement([2, 1, 0]),
-            'status' => $this->faker->randomElement([1, 0]),
+            'tipo_carrera' => $this->faker->randomElement(['universidad', 'instituto', 'otros']),
+            'status' => $this->faker->randomElement(['activo', 'inactivo']),
         ];
     }
 }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('nombre')->unique(); // OBLIGATORIO
-            $table->boolean('tipo_carrera')->default(0); // 0: ni definido
-            $table->boolean('status')->default(1); // 0: inactivo 1: activo
+            $table->enum('tipo_carrera', ['universidad', 'instituto', 'otros'])->default('otros');
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
         });
     }
 

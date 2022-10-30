@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->boolean('estado_postulacion')->default(0); // 0: no definido
-            $table->boolean('status')->default(1); // 0: inactivo 1: activo
+            $table->enum('estado_postulacion', ['aceptado', 'pendiente', 'rechazado'])->default('pendiente');
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
 
             $table->unsignedBigInteger('vacancy_id')->nullable();
             $table->foreign('vacancy_id')->references('id')->on('vacancies')->onDelete('set null');

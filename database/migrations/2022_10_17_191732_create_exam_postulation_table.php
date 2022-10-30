@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('exam_postulation', function (Blueprint $table) {
-            $table->unsignedBigInteger('exam_id')->nullable();
-            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('set null');
+            $table->unsignedBigInteger('exam_id');
+            $table->foreign('exam_id')->references('id')->on('exams');
 
-            $table->unsignedBigInteger('postulation_id')->nullable();
-            $table->foreign('postulation_id')->references('id')->on('postulations')->onDelete('set null');
-        
+            $table->unsignedBigInteger('postulation_id');
+            $table->foreign('postulation_id')->references('id')->on('postulations');
+
             $table->date('fecha')->nullable();
-            $table->boolean('estado_examen')->default(0); // 0: no definido
+            $table->enum('estado_examen', ['aceptado', 'pendiente', 'rechazado'])->default('pendiente');
         });
     }
 

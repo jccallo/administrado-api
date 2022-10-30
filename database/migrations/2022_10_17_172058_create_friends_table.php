@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('nombre'); // OBLIGATORIO
             $table->string('telefono')->unique()->nullable();
             $table->string('direccion')->nullable();
-            $table->string('correo')->unique()->nullable();
-            $table->boolean('status')->default(1); // 0: inactivo 1: activo
+            $table->string('correo')->unique()->nullable(); 
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
         });
     }
 

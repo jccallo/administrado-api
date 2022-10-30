@@ -18,7 +18,7 @@ class ExamFactory extends Factory
     {
         return [
             'nombre' => $this->faker->unique()->word(),
-            'status' => $this->faker->randomElement([1, 0]),
+            'status' => $this->faker->randomElement(['activo', 'inactivo']),
         ];
     }
 }

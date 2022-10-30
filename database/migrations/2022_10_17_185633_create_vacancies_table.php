@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('descripcion'); // OBLIGATORIO
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
-            $table->boolean('status')->default(1); // 0: inactivo 1: activo
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
         });
     }
 

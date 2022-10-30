@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('numero'); // OBLIGATORIO
-            $table->boolean('status')->default(1); // 0: inactivo 1: activo
+            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
 
             $table->unsignedBigInteger('bank_id')->nullable();
             $table->foreign('bank_id')->references('id')->on('banks')->onDelete('set null');

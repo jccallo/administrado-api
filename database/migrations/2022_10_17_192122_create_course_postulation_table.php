@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('course_postulation', function (Blueprint $table) {
-            $table->unsignedBigInteger('course_id')->nullable();
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
 
-            $table->unsignedBigInteger('postulation_id')->nullable();
-            $table->foreign('postulation_id')->references('id')->on('postulations')->onDelete('set null');
-        
+            $table->unsignedBigInteger('postulation_id');
+            $table->foreign('postulation_id')->references('id')->on('postulations');
+
             $table->date('fecha')->nullable();
-            $table->boolean('tipo_curso')->default(0); // no definido
-            $table->boolean('estado_curso')->default(0); // no definido
+            $table->enum('tipo_curso', ['general', 'particular', 'otros'])->default('otros');
+            $table->enum('estado_curso', ['aceptado', 'pendiente', 'rechazado'])->default('pendiente');
         });
     }
 
