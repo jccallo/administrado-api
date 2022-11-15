@@ -3,38 +3,46 @@
 namespace App\Http\Controllers\Friend;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\Friend\StoreFriendRequest;
+use App\Http\Requests\Friend\UpdateFriendRequest;
+use App\Http\Resources\Friend\FriendResource;
 use App\Models\Friend;
-use Illuminate\Http\Request;
 
 class FriendController extends ApiController
 {
     public function index()
     {
         $friends = Friend::orderByDesc('id')->get();
-        return $this->showResponse(compact('friends'));
+        $data = FriendResource::collection($friends);
+        return $data;
     }
 
-    public function store(Request $request)
+    public function store(StoreFriendRequest $request)
     {
-        $friend = Friend::create($request->all());
-        return $this->showResponse(compact('friend'), 201);
-
+        $validated = $request->validated();
+        $friend = Friend::create($validated);
+        $data = new FriendResource($friend);
+        return $data;
     }
 
     public function show(Friend $friend)
     {
-        return  $this->showResponse(compact('friend'));
+        $data = new FriendResource($friend);
+        return $data;
     }
 
-    public function update(Request $request, Friend $friend)
+    public function update(UpdateFriendRequest $request, Friend $friend)
     {
-        $friend->update($request->all());
-        return $this->showResponse(compact('friend'));
+        $validated = $request->validated();
+        $friend->update($validated);
+        $data = new FriendResource($friend);
+        return $data;
     }
 
     public function destroy(Friend $friend)
     {
-        $friend->update(['status' => 0]);
-        return $this->showResponse(compact('friend'));
+        $friend->update(['status' => 'inactivo']);
+        $data = new FriendResource($friend);
+        return $data;
     }
 }

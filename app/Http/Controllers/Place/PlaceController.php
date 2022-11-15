@@ -11,8 +11,9 @@ class PlaceController extends ApiController
 {
     public function index()
     {
-        $data = Place::orderByDesc('id')->get();
-        return PlaceResource::collection($data);
+        $places = Place::orderByDesc('id')->get();
+        $data = PlaceResource::collection($places);
+        return $data;
     }
 
     public function store(Request $request)

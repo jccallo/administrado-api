@@ -15,16 +15,20 @@ return new class extends Migration
     {
         Schema::create('calls', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
 
-            $table->enum('estado_respuesta', ['aceptado', 'pendiente', 'rechazado'])->default('pendiente');
+            $table->enum('estado_respuesta', [
+                'aceptado',
+                'pendiente',
+                'rechazado'
+            ])->default('pendiente'); // default
+
             $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
 
-            $table->unsignedBigInteger('friend_id')->nullable();
-            $table->foreign('friend_id')->references('id')->on('friends')->onDelete('set null');
+            $table->unsignedBigInteger('friend_id'); // OBLIGATORIO
+            $table->foreign('friend_id')->references('id')->on('friends');
 
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('user_id'); // OBLIGATORIO
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

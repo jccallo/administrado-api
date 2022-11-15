@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Call\CallController;
 use App\Http\Controllers\Friend\FriendController;
 use App\Http\Controllers\Place\PlaceController;
 use App\Http\Controllers\User\UserController;
@@ -22,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::resource('users', UserController::class)->except('edit');
-Route::resource('places', PlaceController::class)->except('create', 'edit');
-Route::resource('vacancies', VacancyController::class)->except('create', 'edit');
-Route::resource('friends', FriendController::class)->except('create', 'edit');
+Route::apiResource('users', UserController::class);
+Route::apiResource('places', PlaceController::class);
+Route::apiResource('friends', FriendController::class); // listo
+Route::apiResource('vacancies', VacancyController::class);
+Route::apiResource('calls', CallController::class)->except('show'); // listo

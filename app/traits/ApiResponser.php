@@ -9,32 +9,39 @@ use Illuminate\Support\Collection;
 
 trait ApiResponser
 {
+    /**
+     * @param Collection $data
+     * @param int $code
+     */
     private function successResponse($data, $code)
     {
         return response()->json($data, $code);
     }
 
     /**
-     * @param Array $response datos
-     * @param Integer $code codigo de estado
+     * @param array $response respuesta
+     * @param int $code codigo de estado
      */
     protected function showResponse($response, $code = 200)
     {
-        $ok = collect(['ok' => true]);
+        $ok = collect();
         if (isset($response) && is_array($response)) {
             $ok = $ok->union($response);
         }
         return $this->successResponse($ok, $code);
     }
 
-    // protected function errorResponse($message, $code)
-    // {
-    //     return response()->json([
-    //         'ok' => false,
-    //         'error' => $message,
-    //         'code' => $code
-    //     ], $code);
-    // }
+    /**
+     * @param string $message mensaje de error
+     * @param int $code codigo de estado
+     */
+    protected function errorResponse($message, $code)
+    {
+        return response()->json([
+            'error' => $message,
+            'code' => $code
+        ], $code);
+    }
 
     // /**
     //  * @param Object $response LengthAwarePaginator or Collection object

@@ -47,6 +47,6 @@ class DatabaseSeeder extends Seeder
         Postulation::factory(10)->create();
         Exam::factory(10)->create();
         Course::factory(10)->create();
-        Call::factory(10)->create();
+        // Call::factory(10)->create();
     }
 }

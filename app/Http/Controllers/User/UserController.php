@@ -12,8 +12,9 @@ class UserController extends ApiController
 {
     public function index()
     {
-        $data = User::orderByDesc('id')->get();
-        return UserResource::collection($data);
+        $users = User::orderByDesc('id')->get();
+        $data = UserResource::collection($users);
+        return $data;
     }
 
     public function store(Request $request)
