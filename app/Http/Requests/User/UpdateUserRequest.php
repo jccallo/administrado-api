@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,10 +28,10 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => ['sometimes', 'nullable', 'email', Rule::unique('users', 'email')],
+            'email' => ['sometimes', 'nullable', 'email', Rule::unique('users', 'email')->ignore($this->user->id, 'id')],
             'password' => ['sometimes', 'nullable', 'string', Password::defaults()],
-            'dni' => ['sometimes', 'nullable', 'string', Rule::unique('users', 'dni')],
-            'telefono' => ['sometimes', 'nullable', 'string', Rule::unique('users', 'telefono')],
+            'dni' => ['sometimes', 'nullable', 'string', Rule::unique('users', 'dni')->ignore($this->user->id, 'id')],
+            'telefono' => ['sometimes', 'nullable', 'string', Rule::unique('users', 'telefono')->ignore($this->user->id, 'id')],
             'fecha_nacimiento' => 'sometimes|nullable|date|date_format:Y-m-d',
             'talla_overol' => 'sometimes|nullable|string',
             'talla_zapato' => 'sometimes|nullable|integer',
