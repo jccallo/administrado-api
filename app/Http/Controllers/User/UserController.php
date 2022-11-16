@@ -19,8 +19,8 @@ class UserController extends ApiController
 
     public function store(Request $request)
     {
-        $user = $request->except(['family']); // datos de usuario
-        $relationships = $request->get('relationships'); // familia
+        $user = $request->except(['relationships', 'recommenders']); // datos de usuario
+        $relationships = $request->get('relationships'); // parentesco
         $recommenders = $request->get('recommenders'); // recomendados
 
         $user = User::create($user);

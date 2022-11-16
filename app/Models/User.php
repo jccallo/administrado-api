@@ -69,14 +69,12 @@ class User extends Authenticatable
 
     public function relationships()
     {
-        return $this->belongsToMany(Friend::class, 'relationships', 'user_id', 'friend_id')
-            ->withPivot('parentesco');
+        return $this->hasMany(Relationship::class, 'user_id', 'id');
     }
 
     public function recommenders()
     {
-        return $this->belongsToMany(Friend::class, 'recommenders', 'user_id', 'friend_id')
-            ->withPivot('tipo');
+        return $this->hasMany(Recommender::class, 'user_id', 'id');
     }
 
     /* --------------------------------- metodos -------------------------------- */
@@ -86,29 +84,29 @@ class User extends Authenticatable
         return isset($this->place) ? $this->place->nombre : null;
     }
 
-    public function getRelationships()
-    {
-        $relationships = collect();
-        foreach ($this->relationships as $relationship) {
-            $relationships->push([
-                'id' => $relationship->id,
-                'nombre' => $relationship->nombre,
-                'parentesco' => $relationship->pivot->parentesco,
-            ]);
-        }
-        return $relationships->count() > 0 ? $relationships : null;
-    }
+    // public function getRelationships()
+    // {
+    //     $relationships = collect();
+    //     foreach ($this->relationships as $relationship) {
+    //         $relationships->push([
+    //             'id' => $relationship->id,
+    //             'nombre' => $relationship->nombre,
+    //             'parentesco' => $relationship->pivot->parentesco,
+    //         ]);
+    //     }
+    //     return $relationships->count() > 0 ? $relationships : null;
+    // }
 
-    public function getRecommenders()
-    {
-        $recommenders = collect();
-        foreach ($this->recommenders as $recommender) {
-            $recommenders->push([
-                'id' => $recommender->id,
-                'nombre' => $recommender->nombre,
-                'tipo' => $recommender->pivot->tipo,
-            ]);
-        }
-        return $recommenders->count() > 0 ? $recommenders : null;
-    }
+    // public function getRecommenders()
+    // {
+    //     $recommenders = collect();
+    //     foreach ($this->recommenders as $recommender) {
+    //         $recommenders->push([
+    //             'id' => $recommender->id,
+    //             'nombre' => $recommender->nombre,
+    //             'tipo' => $recommender->pivot->tipo,
+    //         ]);
+    //     }
+    //     return $recommenders->count() > 0 ? $recommenders : null;
+    // }
 }

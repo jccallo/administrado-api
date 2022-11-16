@@ -36,8 +36,8 @@ class UserResource extends JsonResource
             'tipo_usuario' => $this->tipo_usuario, // nunca es null
             'status' => $this->status, // nunca es null
             'place' => $this->getPlaceName(),
-            'relationships' => $this->getRelationships(),
-            'recomenders' => $this->getRecommenders(),
+            // 'relationships' => $this->getRelationships(),
+            // 'recomenders' => $this->getRecommenders(),
         ];
     }
 }
