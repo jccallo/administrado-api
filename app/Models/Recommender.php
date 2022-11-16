@@ -9,6 +9,8 @@ class Recommender extends Model
 {
     use HasFactory;
 
+    const TIPO = ['recomendado', 'lider'];
+
     protected $fillable = [
         'friend_id', // null
         'user_id', // null

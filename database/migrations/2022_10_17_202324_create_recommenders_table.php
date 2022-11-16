@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Recommender;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,10 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable(); // null
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
 
-            $table->enum('tipo', [
-                'lider',
-                'recomendado',
-            ])->default('recomendado'); // default
+            $table->enum('tipo', Recommender::TIPO)->default(Recommender::TIPO[0]); // default
 
             $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
         });

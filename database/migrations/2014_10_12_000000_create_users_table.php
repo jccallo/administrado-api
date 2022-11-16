@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('foto_firma')->nullable(); // null
             $table->string('foto_perfil')->nullable(); // null
             $table->string('foto_huella')->nullable(); // null
-            $table->enum('tipo_usuario', ['externo', 'permamente', 'otros'])->default('otros'); // default
+            $table->enum('tipo_usuario', User::TIPO_USUARIO)->default(User::TIPO_USUARIO[0]); // default
             $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
 
             $table->unsignedBigInteger('place_id')->nullable(); // null
