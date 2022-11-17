@@ -28,7 +28,7 @@ class StoreFriendRequest extends FormRequest
             'nombre' => 'required|string',
             'telefono' => ['sometimes', 'nullable', 'string', Rule::unique('friends', 'telefono')],
             'direccion' => 'sometimes|nullable|string',
-            'correo' => ['sometimes', 'nullable', 'string', Rule::unique('friends', 'correo')],
+            'correo' => ['sometimes', 'nullable', 'email', Rule::unique('friends', 'correo')],
             'status' => 'sometimes|string',
         ];
     }

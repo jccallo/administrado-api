@@ -28,7 +28,7 @@ class UpdateFriendRequest extends FormRequest
             'nombre' => 'required|string',
             'telefono' => ['sometimes', 'nullable', 'string', Rule::unique('friends', 'telefono')->ignore($this->friend->id, 'id')],
             'direccion' => 'sometimes|nullable|string',
-            'correo' => ['sometimes', 'nullable', 'string', Rule::unique('friends', 'correo')->ignore($this->friend->id, 'id')],
+            'correo' => ['sometimes', 'nullable', 'email', Rule::unique('friends', 'correo')->ignore($this->friend->id, 'id')],
             'status' => 'sometimes|string',
         ];
     }
