@@ -32,7 +32,7 @@ class UpdateUserRequest extends FormRequest
             'password' => ['sometimes', 'nullable', 'string', Password::defaults()],
             'dni' => ['sometimes', 'nullable', 'string', Rule::unique('users', 'dni')->ignore($this->user->id, 'id')],
             'telefono' => ['sometimes', 'nullable', 'string', Rule::unique('users', 'telefono')->ignore($this->user->id, 'id')],
-            'fecha_nacimiento' => 'sometimes|nullable|date|date_format:Y-m-d',
+            'fecha_nacimiento' => 'sometimes|nullable|date',
             'talla_overol' => 'sometimes|nullable|string',
             'talla_zapato' => 'sometimes|nullable|integer',
             'talla' => 'sometimes|nullable|numeric',
@@ -44,8 +44,8 @@ class UpdateUserRequest extends FormRequest
             'foto_firma' => 'sometimes|nullable|string',
             'foto_perfil' => 'sometimes|nullable|string',
             'foto_huella' => 'sometimes|nullable|string',
-            'tipo_usuario' => ['sometimes', 'nullable', 'string', Rule::in(User::TIPO_USUARIO)],
-            'status' => ['sometimes', 'nullable', 'string', Rule::in(['activo', 'inactivo'])],
+            'tipo_usuario' => ['sometimes', 'string', Rule::in(User::TIPO_USUARIO)],
+            'status' => ['sometimes', 'string', Rule::in(['activo', 'inactivo'])],
             'place_id' => ['sometimes', 'nullable', 'integer', Rule::exists('places', 'id')],
         ];
     }

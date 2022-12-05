@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const TIPO_USUARIO = ['otros', 'externo', 'permamente'];
+    const TIPO_USUARIO = ['otros', 'externo', 'permanente'];
 
     /**
      * The attributes that are mass assignable.

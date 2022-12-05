@@ -15,7 +15,7 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' => $this->id, // nunca es null
             'name' => $this->name, // nunca es null
             'email' => $this->email,
             'password' => $this->password,
@@ -35,7 +35,7 @@ class UserResource extends JsonResource
             'foto_huella' => $this->foto_huella,
             'tipo_usuario' => $this->tipo_usuario, // nunca es null
             'status' => $this->status, // nunca es null
-            'place' => $this->getPlaceName(),
+            'place_id' => $this->place_id,
             // 'relationships' => $this->getRelationships(),
             // 'recomenders' => $this->getRecommenders(),
         ];
