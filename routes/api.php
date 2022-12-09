@@ -31,10 +31,10 @@ use Illuminate\Support\Facades\Route;
  * users
  */
 Route::apiResource('users', UserController::class); // listo
-Route::apiResource('users.recommenders',UserRecommenderController::class)->only(['index']);
-Route::apiResource('users.relationships',UserRelationshipController::class)->only(['index']);
-Route::apiResource('users.friends.recommenders',UserFriendRecommenderController::class)->only(['store']);
-Route::apiResource('users.friends.relationships',UserFriendRelationshipController::class)->only(['store']);
+Route::apiResource('users.relationships',UserRelationshipController::class)->except(['store', 'show']);
+Route::apiResource('users.recommenders',UserRecommenderController::class)->except(['store', 'show']);
+// Route::apiResource('users.friends.recommenders',UserFriendRecommenderController::class)->only(['store']);
+// Route::apiResource('users.friends.relationships',UserFriendRelationshipController::class)->only(['store']);
 
 
 Route::apiResource('places', PlaceController::class);

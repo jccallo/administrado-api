@@ -71,20 +71,22 @@ class User extends Authenticatable
 
     public function relationships()
     {
-        return $this->hasMany(Relationship::class, 'user_id', 'id');
+        return $this->belongsToMany(Friend::class, 'relationships', 'user_id', 'friend_id')
+            ->withPivot('parentesco');
     }
 
     public function recommenders()
     {
-        return $this->hasMany(Recommender::class, 'user_id', 'id');
+        return $this->belongsToMany(Friend::class, 'recommenders', 'user_id', 'friend_id')
+            ->withPivot('tipo');
     }
 
     /* --------------------------------- metodos -------------------------------- */
 
-    public function getPlaceName()
-    {
-        return isset($this->place) ? $this->place->nombre : null;
-    }
+    // public function getPlaceName()
+    // {
+    //     return isset($this->place) ? $this->place->nombre : null;
+    // }
 
     // public function getRelationships()
     // {

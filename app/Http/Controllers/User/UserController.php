@@ -12,7 +12,7 @@ class UserController extends ApiController
 {
     public function index()
     {
-        $users = User::orderByDesc('id')->get();
+        $users = User::all();
         $data = UserResource::collection($users);
         return $data;
     }
@@ -23,12 +23,6 @@ class UserController extends ApiController
         $user = User::create($validated);
         $data = new UserResource($user);
         return $data;
-
-        // $user = $request->except(['relationships', 'recommenders']); // datos de usuario
-        // $relationships = $request->get('relationships'); // parentesco
-        // $recommenders = $request->get('recommenders'); // recomendados
-        // $user->relationships()->sync($relationships);
-        // $user->recommenders()->sync($recommenders);
     }
 
     public function show(User $user)

@@ -2,16 +2,36 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Recommender\RecommenderResource;
+use App\Http\Controllers\ApiController;
+use App\Http\Requests\User\UpdateUserRecommenderRequest;
+use App\Http\Resources\Friend\FriendResource;
+use App\Models\Friend;
 use App\Models\User;
 
-class UserRecommenderController extends Controller
+class UserRecommenderController extends ApiController
 {
     public function index(User $user)
     {
-        $recommenders = $user->recommenders;
-        $data = RecommenderResource::collection($recommenders);
+        $data = FriendResource::collection($user->recommenders);
+        return $data;
+    }
+
+    public function update(UpdateUserRecommenderRequest $request, User $user, Friend $recommender)
+    {
+        $validated = $request->validated();
+        $tipo = $validated['tipo'] ?? Friend::TIPOS[0];
+        $user->recommenders()->attach($recommender->id, ['tipo' => $tipo]);
+        $data = FriendResource::collection($user->recommenders);
+        return $data;
+    }
+
+    public function destroy(User $user, Friend $recommender)
+    {
+        if (!$user->recommenders()->find($recommender->id)) {
+            return $this->errorResponse('La persona especificada no tiene recomendacion para el usuario', 404);
+        }
+        $user->recommenders()->detach($recommender->id);
+        $data = FriendResource::collection($user->recommenders);
         return $data;
     }
 }

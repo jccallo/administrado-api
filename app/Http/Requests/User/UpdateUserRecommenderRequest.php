@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\User;
 
-use App\Models\Relationship;
+use App\Models\Friend;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreUserFriendRelationshipRequest extends FormRequest
+class UpdateUserRecommenderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class StoreUserFriendRelationshipRequest extends FormRequest
     public function rules()
     {
         return [
-            'parentesco' => ['sometimes', 'string', Rule::in(Relationship::RELATIONSHIPS)],
+            'tipo' => ['sometimes', 'string', Rule::in(Friend::TIPOS)],
         ];
     }
 }
