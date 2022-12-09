@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\User\UpdateUserRelationshipRequest;
-use App\Http\Resources\Friend\FriendResource;
 use App\Models\Friend;
 use App\Models\User;
 
@@ -12,8 +11,7 @@ class UserRelationshipController extends ApiController
 {
     public function index(User $user)
     {
-        $data = FriendResource::collection($user->relationships);
-        return $data;
+        return $this->showAll($user->relationships);
     }
 
     public function update(UpdateUserRelationshipRequest $request, User $user, Friend $relationship)
@@ -21,8 +19,7 @@ class UserRelationshipController extends ApiController
         $validated = $request->validated();
         $parentesco = $validated['parentesco'] ?? Friend::RELATIONSHIPS[0];
         $user->relationships()->attach($relationship->id, ['parentesco' => $parentesco]);
-        $data = FriendResource::collection($user->relationships);
-        return $data;
+        return $this->showAll($user->relationships);
     }
 
     public function destroy(User $user, Friend $relationship)
@@ -31,7 +28,6 @@ class UserRelationshipController extends ApiController
             return $this->errorResponse('La persona especificada no tiene parentesco con el usuario', 404);
         }
         $user->relationships()->detach($relationship->id);
-        $data = FriendResource::collection($user->relationships);
-        return $data;
+        return $this->showAll($user->relationships);
     }
 }

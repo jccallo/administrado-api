@@ -12,8 +12,7 @@ class UserRecommenderController extends ApiController
 {
     public function index(User $user)
     {
-        $data = FriendResource::collection($user->recommenders);
-        return $data;
+        return $this->showAll($user->recommenders);
     }
 
     public function update(UpdateUserRecommenderRequest $request, User $user, Friend $recommender)
@@ -21,8 +20,7 @@ class UserRecommenderController extends ApiController
         $validated = $request->validated();
         $tipo = $validated['tipo'] ?? Friend::TIPOS[0];
         $user->recommenders()->attach($recommender->id, ['tipo' => $tipo]);
-        $data = FriendResource::collection($user->recommenders);
-        return $data;
+        return $this->showAll($user->recommenders);
     }
 
     public function destroy(User $user, Friend $recommender)
@@ -31,7 +29,6 @@ class UserRecommenderController extends ApiController
             return $this->errorResponse('La persona especificada no tiene recomendacion para el usuario', 404);
         }
         $user->recommenders()->detach($recommender->id);
-        $data = FriendResource::collection($user->recommenders);
-        return $data;
+        return $this->showAll($user->recommenders);
     }
 }

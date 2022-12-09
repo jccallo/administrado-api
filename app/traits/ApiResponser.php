@@ -19,19 +19,6 @@ trait ApiResponser
     }
 
     /**
-     * @param array $response respuesta
-     * @param int $code codigo de estado
-     */
-    protected function showResponse($response, $code = 200)
-    {
-        $ok = collect();
-        if (isset($response) && is_array($response)) {
-            $ok = $ok->union($response);
-        }
-        return $this->successResponse($ok, $code);
-    }
-
-    /**
      * @param string $message mensaje de error
      * @param int $code codigo de estado
      */
@@ -41,6 +28,19 @@ trait ApiResponser
             'message' => $message,
             'code' => $code
         ], $code);
+    }
+
+    /**
+     * @param Object $response Collection object
+     * @param Integer $code codigo de estado
+     */
+    protected function showAll($response, $code = 200)
+    {
+        $ok = collect();
+        if ($response instanceof Collection) {
+            $ok->put('data', $response);
+        }
+        return $this->successResponse($ok, $code);
     }
 
     // /**
