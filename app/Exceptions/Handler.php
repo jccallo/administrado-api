@@ -4,9 +4,11 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -59,9 +61,13 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof ValidationException) {
+            return $this->errorResponse($exception->errors(), 422);
+        }
+
         if ($exception instanceof ModelNotFoundException) {
             $modelo = strtolower(class_basename($exception->getModel()));
-            return $this->errorResponse("Instancia de {$modelo} no encontrada", 403);
+            return $this->errorResponse("No existe ninguna instancia de {$modelo} con el id especificado", 404);
         }
 
         if ($exception instanceof NotFoundHttpException) {
@@ -70,6 +76,10 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof MethodNotAllowedHttpException) {
             return $this->errorResponse("Metodo de peticion no valido", 405);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return $this->errorResponse('No autenticado.', 401);
         }
 
         if ($exception instanceof AuthorizationException) {
@@ -92,12 +102,18 @@ class Handler extends ExceptionHandler
             if ($code == 1062) {
                 return $this->errorResponse('Imposible agregar o actualizar un registro con llave unica repetida', 409);
             }
+
+            if ($code == 2002) {
+                return $this->errorResponse('No se puede establecer una conexión a la base de datos', 500);
+            }
         }
 
-        // if (config('app.debug')) {
-        //     return parent::render($request, $exception);
-        // }
-        return parent::render($request, $exception);
-        return $this->errorResponse('Error inesperado', 500);
+        // si estamos modo debug, lo errores no manejados deben mostrarse para el programador
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
+
+        // si estamos en modo de produccion, los errores no manejados tendran este mensaje de error
+        return $this->errorResponse('Error inesperado. Intente luego', 500);
     }
 }
