@@ -6,7 +6,7 @@ use App\Models\Friend;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateUserRecommenderRequest extends FormRequest
+class StoreUserRecommenderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,7 @@ class UpdateUserRecommenderRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => ['required', 'integer', Rule::exists('friends', 'id')],
             'tipo' => ['required', 'string', Rule::in(Friend::TIPOS)],
         ];
     }

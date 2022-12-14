@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\User\StoreUserRecommenderRequest;
 use App\Http\Requests\User\UpdateUserRecommenderRequest;
 use App\Http\Resources\Friend\FriendResource;
 use App\Models\Friend;
@@ -15,11 +16,17 @@ class UserRecommenderController extends ApiController
         return $this->showAll($user->recommenders);
     }
 
+    public function store(StoreUserRecommenderRequest $request, User $user)
+    {
+        $validated = $request->validated();
+        $user->recommenders()->attach($validated['id'], ['tipo' => $validated['tipo']]);
+        return $this->showAll($user->recommenders);
+    }
+
     public function update(UpdateUserRecommenderRequest $request, User $user, Friend $recommender)
     {
         $validated = $request->validated();
-        $tipo = $validated['tipo'] ?? Friend::TIPOS[0];
-        $user->recommenders()->attach($recommender->id, ['tipo' => $tipo]);
+        $user->recommenders()->updateExistingPivot($recommender->id, ['tipo' => $validated['tipo']]);
         return $this->showAll($user->recommenders);
     }
 
