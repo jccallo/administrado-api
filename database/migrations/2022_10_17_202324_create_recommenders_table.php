@@ -15,18 +15,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('recommenders', function (Blueprint $table) {
-            // $table->id();
-            // $table->timestamps();
+            $table->unsignedBigInteger('friend_id'); // OBLIGATORIO
+            $table->foreign('friend_id')->references('id')->on('friends')->onDelete('cascade');
 
-            $table->unsignedBigInteger('friend_id');
-            $table->foreign('friend_id')->references('id')->on('friends');
+            $table->unsignedBigInteger('user_id'); // OBLIGATORIO
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->enum('tipo', ['recomendado', 'lider']); // OBLIGATORIO
 
-            $table->enum('tipo', Friend::TIPOS)->default(Friend::TIPOS[0]); // default
-
-            // $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
+            $table->unique(['friend_id', 'user_id']);
         });
     }
 

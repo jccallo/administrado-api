@@ -15,18 +15,33 @@ return new class extends Migration
     public function up()
     {
         Schema::create('relationships', function (Blueprint $table) {
-            // $table->id();
-            // $table->timestamps();
+            $table->unsignedBigInteger('friend_id'); // OBLIGATORIO
+            $table->foreign('friend_id')->references('id')->on('friends')->onDelete('cascade');
 
-            $table->unsignedBigInteger('friend_id');
-            $table->foreign('friend_id')->references('id')->on('friends');
+            $table->unsignedBigInteger('user_id'); // OBLIGATORIO
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->enum('parentesco', [
+                // otro tipo
+                'amigo(a)',
+                'familiar',
+                // por afinidad
+                'suegro(a)',
+                'yerno',
+                'nuera',
+                'cuñado(a)',
+                // por consaguinidad
+                'abuelo(a)',
+                'padre',
+                'madre',
+                'tio(a)',
+                'sobrino(a)',
+                'primo(a)',
+                'hermano(a)',
+                'hijo(a)',
+            ]); // OBLIGATORIO
 
-            $table->enum('parentesco', Friend::RELATIONSHIPS)->default(Friend::RELATIONSHIPS[0]); // default
-
-            // $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
+            $table->unique(['friend_id', 'user_id']);
         });
     }
 

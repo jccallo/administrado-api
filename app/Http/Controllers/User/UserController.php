@@ -41,7 +41,7 @@ class UserController extends ApiController
 
     public function destroy(User $user)
     {
-        $user->update(['status' => 'inactivo']);
+        $user->delete();
         $data = new UserResource($user);
         return $data;
     }

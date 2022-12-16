@@ -14,21 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('calls', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('friend_id'); // OBLIGATORIO
+            $table->foreign('friend_id')->references('id')->on('friends')->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id'); // OBLIGATORIO
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->enum('estado_respuesta', [
                 'aceptado',
                 'pendiente',
                 'rechazado'
-            ])->default('pendiente'); // default
+            ]); // OBLIGATORIO
 
-            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
-
-            $table->unsignedBigInteger('friend_id'); // OBLIGATORIO
-            $table->foreign('friend_id')->references('id')->on('friends');
-
-            $table->unsignedBigInteger('user_id'); // OBLIGATORIO
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unique(['friend_id', 'user_id']);
         });
     }
 
