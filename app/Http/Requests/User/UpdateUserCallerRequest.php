@@ -6,7 +6,7 @@ use App\Models\Friend;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateUserRelationshipRequest extends FormRequest
+class UpdateUserCallerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class UpdateUserRelationshipRequest extends FormRequest
     public function rules()
     {
         return [
-            'parentesco' => ['required', 'string', Rule::in(Friend::PARENTESCO)],
+            'estado_respuesta' => ['required', 'string', Rule::in(Friend::ESTADO_RESPUESTA)],
         ];
     }
 }

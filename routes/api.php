@@ -3,6 +3,7 @@
 use App\Http\Controllers\Call\CallController;
 use App\Http\Controllers\Friend\FriendController;
 use App\Http\Controllers\Place\PlaceController;
+use App\Http\Controllers\User\UserCallerController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserFriendRecommenderController;
 use App\Http\Controllers\User\UserFriendRelationshipController;
@@ -27,17 +28,14 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-/**
- * users
- */
-Route::apiResource('users', UserController::class); // listo
-Route::apiResource('users.relationships',UserRelationshipController::class)->except(['store', 'show']);
-Route::apiResource('users.recommenders',UserRecommenderController::class)->except(['show']);
-// Route::apiResource('users.friends.recommenders',UserFriendRecommenderController::class)->only(['store']);
-// Route::apiResource('users.friends.relationships',UserFriendRelationshipController::class)->only(['store']);
-
-
+/* places */
 Route::apiResource('places', PlaceController::class);
+
+/* users */
+Route::apiResource('users', UserController::class); // listo
+Route::apiResource('users.relationships',UserRelationshipController::class)->except(['show']); // listo
+Route::apiResource('users.recommenders',UserRecommenderController::class)->except(['show']); // listo
+Route::apiResource('users.callers',UserCallerController::class)->except(['show']); // listo
+
 Route::apiResource('friends', FriendController::class); // listo
 Route::apiResource('vacancies', VacancyController::class);
-Route::apiResource('calls', CallController::class)->except(['show']); // listo

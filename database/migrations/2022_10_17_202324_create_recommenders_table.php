@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); // OBLIGATORIO
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->enum('tipo', ['recomendado', 'lider']); // OBLIGATORIO
+            $table->enum('tipo', Friend::TIPO); // OBLIGATORIO
 
             $table->unique(['friend_id', 'user_id']);
         });

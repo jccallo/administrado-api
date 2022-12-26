@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\User\StoreUserRelationshipRequest;
 use App\Http\Requests\User\UpdateUserRelationshipRequest;
 use App\Models\Friend;
 use App\Models\User;
@@ -14,11 +15,20 @@ class UserRelationshipController extends ApiController
         return $this->showAll($user->relationships);
     }
 
-    public function update(UpdateUserRelationshipRequest $request, User $user, Friend $relationship)
+    public function store(StoreUserRelationshipRequest $request, User $user)
     {
         $validated = $request->validated();
-        $parentesco = $validated['parentesco'] ?? Friend::RELATIONSHIPS[0];
-        $user->relationships()->attach($relationship->id, ['parentesco' => $parentesco]);
+        $user->relationships()->attach($validated['id'], ['parentesco' => $validated['parentesco']]);
+        return $this->showAll($user->relationships);
+    }
+
+    public function update(UpdateUserRelationshipRequest $request, User $user, Friend $relationship)
+    {
+        if (!$user->relationships()->find($relationship->id)) {
+            return $this->errorResponse('La persona especificada no tiene parentesco con el usuario', 404);
+        }
+        $validated = $request->validated();
+        $user->relationships()->updateExistingPivot($relationship->id, ['parentesco' => $validated['parentesco']]);
         return $this->showAll($user->relationships);
     }
 

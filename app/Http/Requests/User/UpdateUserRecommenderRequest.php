@@ -26,7 +26,7 @@ class UpdateUserRecommenderRequest extends FormRequest
     public function rules()
     {
         return [
-            'tipo' => ['required', 'string', Rule::in(Friend::TIPOS)],
+            'tipo' => ['required', 'string', Rule::in(Friend::TIPO)],
         ];
     }
 }

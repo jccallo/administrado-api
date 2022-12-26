@@ -27,7 +27,7 @@ class StoreUserRecommenderRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer', Rule::exists('friends', 'id')],
-            'tipo' => ['required', 'string', Rule::in(Friend::TIPOS)],
+            'tipo' => ['required', 'string', Rule::in(Friend::TIPO)],
         ];
     }
 }

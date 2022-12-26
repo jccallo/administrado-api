@@ -42,7 +42,6 @@ class User extends Authenticatable
         'foto_perfil', // null
         'foto_huella', // null
         'tipo_usuario', // default
-        'status', // default
         'place_id', // null
     ];
 
@@ -82,6 +81,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Friend::class, 'recommenders', 'user_id', 'friend_id')
             ->withPivot('tipo');
+    }
+
+    public function callers()
+    {
+        return $this->belongsToMany(Friend::class, 'callers', 'user_id', 'friend_id')
+            ->withPivot('estado_respuesta');
     }
 
     /* --------------------------------- metodos -------------------------------- */
