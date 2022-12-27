@@ -3,6 +3,7 @@
 use App\Http\Controllers\Call\CallController;
 use App\Http\Controllers\Friend\FriendController;
 use App\Http\Controllers\Place\PlaceController;
+use App\Http\Controllers\Postulation\PostulationController;
 use App\Http\Controllers\User\UserCallerController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserFriendRecommenderController;
@@ -37,5 +38,11 @@ Route::apiResource('users.relationships',UserRelationshipController::class)->exc
 Route::apiResource('users.recommenders',UserRecommenderController::class)->except(['show']); // listo
 Route::apiResource('users.callers',UserCallerController::class)->except(['show']); // listo
 
+/* friends */
 Route::apiResource('friends', FriendController::class); // listo
+
+/* vacancies */
 Route::apiResource('vacancies', VacancyController::class); // listo
+
+/* postulations */
+Route::apiResource('postulations', PostulationController::class); // listo

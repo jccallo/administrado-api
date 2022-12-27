@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Postulation;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,14 +18,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->enum('estado_postulacion', ['aceptado', 'pendiente', 'rechazado'])->default('pendiente');
-            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
+            $table->enum('estado_postulacion', Postulation::ESTADO_POSTULACION); // OBLIGATORIO
+            $table->softDeletes(); // null
 
-            $table->unsignedBigInteger('vacancy_id')->nullable();
-            $table->foreign('vacancy_id')->references('id')->on('vacancies')->onDelete('set null');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('vacancy_id');
+            $table->foreign('vacancy_id')->references('id')->on('vacancies')->onDelete('cascade');
         });
     }
 

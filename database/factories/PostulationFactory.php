@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Postulation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +18,9 @@ class PostulationFactory extends Factory
     public function definition()
     {
         return [
-            'estado_postulacion' => $this->faker->randomElement(['aceptado', 'pendiente', 'rechazado']),
-            'status' => $this->faker->randomElement(['activo', 'inactivo']),
-            'vacancy_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
+            'estado_postulacion' => $this->faker->randomElement(Postulation::ESTADO_POSTULACION),
             'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
+            'vacancy_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
         ];
     }
 }
