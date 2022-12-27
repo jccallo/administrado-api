@@ -17,7 +17,6 @@ class PlaceResource extends JsonResource
         return [
             'id' => $this->id,
             'nombre' => $this->nombre,
-            'status' => $this->status,
         ];
     }
 }

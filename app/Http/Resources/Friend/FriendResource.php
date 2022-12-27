@@ -20,7 +20,6 @@ class FriendResource extends JsonResource
             'telefono' => $this->telefono,
             'direccion' => $this->direccion,
             'correo' => $this->correo,
-            'status' => $this->status,
         ];
     }
 }

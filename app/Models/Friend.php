@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Friend extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     // relationships
     const PARENTESCO = [
@@ -45,6 +48,5 @@ class Friend extends Model
         'telefono',
         'direccion',
         'correo',
-        'status',
     ];
 }

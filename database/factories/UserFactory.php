@@ -40,7 +40,6 @@ class UserFactory extends Factory
             'foto_perfil' => ($this->faker->ean13()).'.jpg',
             'foto_huella' => ($this->faker->ean13()).'.jpg',
             'tipo_usuario' => $this->faker->randomElement(User::TIPO_USUARIO),
-            // 'status' => $this->faker->randomElement(['activo', 'inactivo']),
             'place_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
         ];
     }

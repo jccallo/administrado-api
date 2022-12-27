@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamps(); // null
 
             $table->string('nombre')->unique(); // OBLIGATORIO
-            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
+            $table->softDeletes(); // null
         });
     }
 

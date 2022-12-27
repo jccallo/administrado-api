@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 /* places */
-Route::apiResource('places', PlaceController::class);
+Route::apiResource('places', PlaceController::class); // listo
 
 /* users */
 Route::apiResource('users', UserController::class); // listo

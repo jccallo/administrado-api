@@ -12,7 +12,7 @@ class FriendController extends ApiController
 {
     public function index()
     {
-        $friends = Friend::orderByDesc('id')->get();
+        $friends = Friend::all();
         $data = FriendResource::collection($friends);
         return $data;
     }
@@ -41,7 +41,7 @@ class FriendController extends ApiController
 
     public function destroy(Friend $friend)
     {
-        $friend->update(['status' => 'inactivo']);
+        $friend->delete();
         $data = new FriendResource($friend);
         return $data;
     }

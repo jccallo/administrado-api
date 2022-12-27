@@ -21,7 +21,6 @@ class FriendFactory extends Factory
             'telefono' => $this->faker->unique()->e164PhoneNumber(),
             'direccion' => $this->faker->address(),
             'correo' => $this->faker->unique()->safeEmail(),
-            'status' => $this->faker->randomElement(['activo', 'inactivo']),
         ];
     }
 }

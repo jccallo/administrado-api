@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Friend;
+namespace App\Http\Requests\Place;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreFriendRequest extends FormRequest
+class StorePlaceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,7 @@ class StoreFriendRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required|string',
-            'telefono' => ['sometimes', 'nullable', 'string', Rule::unique('friends', 'telefono')],
-            'direccion' => 'sometimes|nullable|string',
-            'correo' => ['sometimes', 'nullable', 'email', Rule::unique('friends', 'correo')],
+            'nombre' => ['required', 'string', Rule::unique('places', 'nombre')],
         ];
     }
 }

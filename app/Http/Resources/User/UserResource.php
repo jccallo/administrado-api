@@ -34,10 +34,7 @@ class UserResource extends JsonResource
             'foto_perfil' => $this->foto_perfil,
             'foto_huella' => $this->foto_huella,
             'tipo_usuario' => $this->tipo_usuario, // nunca es null
-            'status' => $this->status, // nunca es null
             'place_id' => $this->place_id,
-            // 'relationships' => $this->getRelationships(),
-            // 'recomenders' => $this->getRecommenders(),
         ];
     }
 }

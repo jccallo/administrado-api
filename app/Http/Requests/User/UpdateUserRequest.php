@@ -45,7 +45,6 @@ class UpdateUserRequest extends FormRequest
             'foto_perfil' => 'sometimes|nullable|string',
             'foto_huella' => 'sometimes|nullable|string',
             'tipo_usuario' => ['sometimes', 'string', Rule::in(User::TIPO_USUARIO)],
-            'status' => ['sometimes', 'string', Rule::in(['activo', 'inactivo'])],
             'place_id' => ['sometimes', 'nullable', 'integer', Rule::exists('places', 'id')],
         ];
     }
