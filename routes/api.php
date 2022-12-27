@@ -38,4 +38,4 @@ Route::apiResource('users.recommenders',UserRecommenderController::class)->excep
 Route::apiResource('users.callers',UserCallerController::class)->except(['show']); // listo
 
 Route::apiResource('friends', FriendController::class); // listo
-Route::apiResource('vacancies', VacancyController::class);
+Route::apiResource('vacancies', VacancyController::class); // listo

@@ -16,10 +16,10 @@ class VacancyResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,
-            'status' => $this->status,
         ];
     }
 }

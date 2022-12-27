@@ -17,10 +17,10 @@ class VacancyFactory extends Factory
     public function definition()
     {
         return [
+            'nombre' => $this->faker->word(),
             'descripcion' => $this->faker->sentence(),
             'fecha_inicio' => $this->faker->date(),
             'fecha_fin' => $this->faker->date(),
-            'status' => $this->faker->randomElement(['activo', 'inactivo']),
         ];
     }
 }

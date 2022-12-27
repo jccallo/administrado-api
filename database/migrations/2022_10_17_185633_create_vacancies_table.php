@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->text('descripcion'); // OBLIGATORIO
-            $table->date('fecha_inicio')->nullable();
-            $table->date('fecha_fin')->nullable();
-            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
+            $table->string('nombre'); // OBLIGATORIO
+            $table->text('descripcion')->nullable(); // null
+            $table->date('fecha_inicio')->nullable(); // null
+            $table->date('fecha_fin')->nullable(); // null
+            $table->softDeletes(); // null
         });
     }
 

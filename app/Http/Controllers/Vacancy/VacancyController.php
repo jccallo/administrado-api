@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vacancy;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\Vacancy\VacancyRequest;
 use App\Http\Resources\Vacancy\VacancyResource;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
@@ -11,12 +12,12 @@ class VacancyController extends ApiController
 {
     public function index()
     {
-        $vacancies = Vacancy::orderByDesc('id')->get();
+        $vacancies = Vacancy::all();
         $data = VacancyResource::collection($vacancies);
         return $data;
     }
 
-    public function store(Request $request)
+    public function store(VacancyRequest $request)
     {
         $vacancy = Vacancy::create($request->all());
         $data = new VacancyResource($vacancy);
@@ -30,7 +31,7 @@ class VacancyController extends ApiController
         return $data;
     }
 
-    public function update(Request $request, Vacancy $vacancy)
+    public function update(VacancyRequest $request, Vacancy $vacancy)
     {
         $vacancy->update($request->all());
         $data = new VacancyResource($vacancy);
@@ -39,7 +40,7 @@ class VacancyController extends ApiController
 
     public function destroy(Vacancy $vacancy)
     {
-        $vacancy->update(['status' => 'inactivo']);
+        $vacancy->delete();
         $data = new VacancyResource($vacancy);
         return $data;
     }
