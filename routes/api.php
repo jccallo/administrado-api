@@ -5,6 +5,7 @@ use App\Http\Controllers\Exam\ExamController;
 use App\Http\Controllers\Friend\FriendController;
 use App\Http\Controllers\Place\PlaceController;
 use App\Http\Controllers\Postulation\PostulationController;
+use App\Http\Controllers\Postulation\PostulationExamController;
 use App\Http\Controllers\User\UserCallerController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserRecommenderController;
@@ -44,6 +45,7 @@ Route::apiResource('vacancies', VacancyController::class); // listo
 
 /* postulations */
 Route::apiResource('postulations', PostulationController::class); // listo
+Route::apiResource('postulations.exams', PostulationExamController::class)->except(['show']); //
 
 /* examenes */
 Route::apiResource('exams', ExamController::class); // listo

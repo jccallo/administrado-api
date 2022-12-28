@@ -12,6 +12,8 @@ class Exam extends Model
 
     protected $dates = ['deleted_at'];
 
+    const ESTADO_EXAMEN = ['aceptado', 'pendiente', 'rechazado'];
+
     protected $fillable = [
         'nombre',
         'descripcion',
