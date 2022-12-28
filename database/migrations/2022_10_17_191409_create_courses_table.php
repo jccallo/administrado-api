@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('nombre')->unique(); // OBLIGATORIO
-            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
+            $table->string('nombre'); // OBLIGATORIO
+            $table->text('descripcion')->nullable(); // null
+            $table->softDeletes(); // null
         });
     }
 
