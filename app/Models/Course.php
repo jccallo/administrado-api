@@ -12,6 +12,10 @@ class Course extends Model
 
     protected $dates = ['deleted_at'];
 
+    const TIPO_CURSO = ['general', 'particular', 'otros'];
+
+    const ESTADO_CURSO = ['aceptado', 'pendiente', 'rechazado'];
+
     protected $fillable = [
         'nombre',
         'descripcion',

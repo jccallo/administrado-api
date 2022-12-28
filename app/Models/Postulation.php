@@ -25,4 +25,10 @@ class Postulation extends Model
         return $this->belongsToMany(Exam::class, 'exam_postulation', 'postulation_id', 'exam_id')
             ->withPivot('estado_examen', 'fecha_examen');
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_postulation', 'postulation_id', 'course_id')
+            ->withPivot('tipo_curso', 'estado_curso', 'fecha_curso');
+    }
 }

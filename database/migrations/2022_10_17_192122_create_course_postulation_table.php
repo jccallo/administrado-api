@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Course;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,15 +15,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('course_postulation', function (Blueprint $table) {
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->unsignedBigInteger('course_id'); // OBLIGATORIO
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
 
-            $table->unsignedBigInteger('postulation_id');
-            $table->foreign('postulation_id')->references('id')->on('postulations');
+            $table->unsignedBigInteger('postulation_id'); // OBLIGATORIO
+            $table->foreign('postulation_id')->references('id')->on('postulations')->onDelete('cascade');
 
-            $table->date('fecha')->nullable();
-            $table->enum('tipo_curso', ['general', 'particular', 'otros'])->default('otros');
-            $table->enum('estado_curso', ['aceptado', 'pendiente', 'rechazado'])->default('pendiente');
+            $table->enum('tipo_curso', Course::TIPO_CURSO); // OBLIGATORIO
+            $table->enum('estado_curso',  Course::ESTADO_CURSO); // OBLIGATORIO
+            $table->date('fecha_curso'); // OBLIGATORIO
+
+            $table->unique(['course_id', 'postulation_id']);
         });
     }
 
