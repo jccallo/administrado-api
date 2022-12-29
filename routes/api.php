@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Career\CareerController;
 use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\Exam\ExamController;
 use App\Http\Controllers\Fault\FaultController;
@@ -58,3 +59,6 @@ Route::apiResource('courses', CourseController::class); // listo
 
 /* faults */
 Route::apiResource('faults', FaultController::class); // listo
+
+/* careers */
+Route::apiResource('careers', CareerController::class); // listo

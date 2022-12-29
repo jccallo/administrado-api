@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Career;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,8 @@ class CareerFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->unique()->word(),
-            'tipo_carrera' => $this->faker->randomElement(['universidad', 'instituto', 'otros']),
-            'status' => $this->faker->randomElement(['activo', 'inactivo']),
+            'nombre' => $this->faker->word(),
+            'tipo_carrera' => $this->faker->randomElement(Career::TIPO_CARRERA),
         ];
     }
 }

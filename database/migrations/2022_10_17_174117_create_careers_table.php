@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Career;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,9 +18,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('nombre')->unique(); // OBLIGATORIO
-            $table->enum('tipo_carrera', ['universidad', 'instituto', 'otros'])->default('otros');
-            $table->enum('status', ['activo', 'inactivo'])->default('activo'); // default
+            $table->string('nombre'); // OBLIGATORIO
+            $table->enum('tipo_carrera', Career::TIPO_CARRERA); // OBLIGATORIO
+            $table->softDeletes(); // null
         });
     }
 
