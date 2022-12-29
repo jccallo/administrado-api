@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\Exam\ExamController;
+use App\Http\Controllers\Fault\FaultController;
 use App\Http\Controllers\Friend\FriendController;
 use App\Http\Controllers\Place\PlaceController;
 use App\Http\Controllers\Postulation\PostulationController;
@@ -54,3 +55,6 @@ Route::apiResource('exams', ExamController::class); // listo
 
 /* courses */
 Route::apiResource('courses', CourseController::class); // listo
+
+/* faults */
+Route::apiResource('faults', FaultController::class); // listo

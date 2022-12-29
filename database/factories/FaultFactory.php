@@ -17,10 +17,8 @@ class FaultFactory extends Factory
     public function definition()
     {
         return [
+            'nombre' => $this->faker->word(),
             'descripcion' => $this->faker->sentence(),
-            'fecha' => $this->faker->date(),
-            'place_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
-            'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
         ];
     }
 }
