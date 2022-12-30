@@ -13,6 +13,7 @@ use App\Http\Controllers\Postulation\PostulationCourseController;
 use App\Http\Controllers\Postulation\PostulationExamController;
 use App\Http\Controllers\User\UserCallerController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserFaultController;
 use App\Http\Controllers\User\UserRecommenderController;
 use App\Http\Controllers\User\UserRelationshipController;
 use App\Http\Controllers\Vacancy\VacancyController;
@@ -41,6 +42,7 @@ Route::apiResource('users', UserController::class); // listo
 Route::apiResource('users.relationships',UserRelationshipController::class)->except(['show']); // listo
 Route::apiResource('users.recommenders',UserRecommenderController::class)->except(['show']); // listo
 Route::apiResource('users.callers',UserCallerController::class)->except(['show']); // listo
+Route::apiResource('users.faults',UserFaultController::class)->except(['show']); // listo
 
 /* friends */
 Route::apiResource('friends', FriendController::class); // listo

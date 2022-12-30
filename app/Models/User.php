@@ -89,6 +89,12 @@ class User extends Authenticatable
             ->withPivot('estado_respuesta');
     }
 
+    public function faults()
+    {
+        return $this->belongsToMany(Fault::class, 'fault_user', 'user_id', 'fault_id')
+            ->withPivot('fecha_falta', 'place_id');
+    }
+
     /* --------------------------------- metodos -------------------------------- */
 
     // public function getPlaceName()
