@@ -5,6 +5,7 @@ use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\Exam\ExamController;
 use App\Http\Controllers\Fault\FaultController;
 use App\Http\Controllers\Friend\FriendController;
+use App\Http\Controllers\Job\JobController;
 use App\Http\Controllers\Place\PlaceController;
 use App\Http\Controllers\Postulation\PostulationController;
 use App\Http\Controllers\Postulation\PostulationCourseController;
@@ -62,3 +63,6 @@ Route::apiResource('faults', FaultController::class); // listo
 
 /* careers */
 Route::apiResource('careers', CareerController::class); // listo
+
+/* jobs */
+Route::apiResource('jobs', JobController::class); // listo
