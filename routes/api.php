@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Bank\BankController;
 use App\Http\Controllers\Career\CareerController;
 use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\Exam\ExamController;
@@ -66,3 +67,6 @@ Route::apiResource('careers', CareerController::class); // listo
 
 /* jobs */
 Route::apiResource('jobs', JobController::class); // listo
+
+/* banks */
+Route::apiResource('banks', BankController::class); // listo
