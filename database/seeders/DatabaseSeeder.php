@@ -42,7 +42,6 @@ class DatabaseSeeder extends Seeder
         Career::factory(10)->create();
         Job::factory(10)->create();
         Bank::factory(10)->create();
-        Account::factory(10)->create();
         Vacancy::factory(10)->create();
         Postulation::factory(10)->create();
         Exam::factory(10)->create();

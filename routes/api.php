@@ -11,6 +11,7 @@ use App\Http\Controllers\Place\PlaceController;
 use App\Http\Controllers\Postulation\PostulationController;
 use App\Http\Controllers\Postulation\PostulationCourseController;
 use App\Http\Controllers\Postulation\PostulationExamController;
+use App\Http\Controllers\User\UserBankController;
 use App\Http\Controllers\User\UserCallerController;
 use App\Http\Controllers\User\UserCareerController;
 use App\Http\Controllers\User\UserController;
@@ -47,6 +48,7 @@ Route::apiResource('users.callers',UserCallerController::class)->except(['show']
 Route::apiResource('users.faults',UserFaultController::class)->except(['show']); // listo
 Route::apiResource('users.careers',UserCareerController::class)->except(['show']); // listo
 Route::apiResource('users.jobs',UserJobController::class)->except(['show']); // listo
+Route::apiResource('users.banks',UserBankController::class)->except(['show']); // listo
 
 /* friends */
 Route::apiResource('friends', FriendController::class); // listo

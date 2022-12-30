@@ -105,6 +105,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Job::class, 'job_user', 'user_id', 'job_id');
     }
 
+    public function accounts()
+    {
+        return $this->belongsToMany(Bank::class, 'bank_user', 'user_id', 'bank_id')
+            ->withPivot('numero_cuenta', 'numero_cuenta_interbancario');
+    }
+
     /* --------------------------------- metodos -------------------------------- */
 
     // public function getPlaceName()
