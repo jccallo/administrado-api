@@ -22,7 +22,7 @@ class UserCareerController extends ApiController
     public function destroy(User $user, Career $career)
     {
         if (!$user->careers()->find($career->id)) {
-            return $this->errorResponse('El cargo especificado no esta asignado al usuario', 404);
+            return $this->errorResponse('La carrera especificado no esta asignado al usuario', 404);
         }
         $user->careers()->detach($career->id);
         return $this->showAll($user->careers);

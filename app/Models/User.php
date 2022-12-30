@@ -100,6 +100,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Career::class, 'career_user', 'user_id', 'career_id');
     }
 
+    public function jobs()
+    {
+        return $this->belongsToMany(Job::class, 'job_user', 'user_id', 'job_id');
+    }
+
     /* --------------------------------- metodos -------------------------------- */
 
     // public function getPlaceName()

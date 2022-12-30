@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('job_user', function (Blueprint $table) {
             $table->unsignedBigInteger('job_id');
-            $table->foreign('job_id')->references('id')->on('jobs');
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

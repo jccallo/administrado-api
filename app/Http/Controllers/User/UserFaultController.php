@@ -14,13 +14,6 @@ class UserFaultController extends ApiController
         return $this->showAll($user->faults);
     }
 
-    // public function store(StoreUserCallerRequest $request, User $user)
-    // {
-    //     $validated = $request->validated();
-    //     $user->callers()->attach($validated['id'], ['estado_respuesta' => $validated['estado_respuesta']]);
-    //     return $this->showAll($user->callers);
-    // }
-
     public function update(UserFaultRequest $request, User $user, Fault $fault)
     {
         $validated = $request->validated();

@@ -15,6 +15,7 @@ use App\Http\Controllers\User\UserCallerController;
 use App\Http\Controllers\User\UserCareerController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserFaultController;
+use App\Http\Controllers\User\UserJobController;
 use App\Http\Controllers\User\UserRecommenderController;
 use App\Http\Controllers\User\UserRelationshipController;
 use App\Http\Controllers\Vacancy\VacancyController;
@@ -45,6 +46,7 @@ Route::apiResource('users.recommenders',UserRecommenderController::class)->excep
 Route::apiResource('users.callers',UserCallerController::class)->except(['show']); // listo
 Route::apiResource('users.faults',UserFaultController::class)->except(['show']); // listo
 Route::apiResource('users.careers',UserCareerController::class)->except(['show']); // listo
+Route::apiResource('users.jobs',UserJobController::class)->except(['show']); // listo
 
 /* friends */
 Route::apiResource('friends', FriendController::class); // listo
