@@ -95,6 +95,11 @@ class User extends Authenticatable
             ->withPivot('fecha_falta', 'place_id');
     }
 
+    public function careers()
+    {
+        return $this->belongsToMany(Career::class, 'career_user', 'user_id', 'career_id');
+    }
+
     /* --------------------------------- metodos -------------------------------- */
 
     // public function getPlaceName()

@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('career_user', function (Blueprint $table) {
             $table->unsignedBigInteger('career_id');
-            $table->foreign('career_id')->references('id')->on('careers');
+            $table->foreign('career_id')->references('id')->on('careers')->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
