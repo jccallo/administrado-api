@@ -7,7 +7,6 @@ use App\Http\Requests\Place\StorePlaceRequest;
 use App\Http\Requests\Place\UpdatePlaceRequest;
 use App\Http\Resources\Place\PlaceResource;
 use App\Models\Place;
-use Illuminate\Http\Request;
 
 class PlaceController extends ApiController
 {
@@ -20,7 +19,8 @@ class PlaceController extends ApiController
 
     public function store(StorePlaceRequest $request)
     {
-        $place = Place::create($request->all());
+        $validated = $request->validated();
+        $place = Place::create($validated);
         $data = new PlaceResource($place);
         return $data;
     }
@@ -33,7 +33,8 @@ class PlaceController extends ApiController
 
     public function update(UpdatePlaceRequest $request, Place $place)
     {
-        $place->update($request->all());
+        $validated = $request->validated();
+        $place->update($validated);
         $data = new PlaceResource($place);
         return $data;
     }

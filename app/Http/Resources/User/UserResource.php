@@ -15,8 +15,8 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id, // nunca es null
-            'name' => $this->name, // nunca es null
+            'id' => $this->id, // nunca trae null
+            'name' => $this->name, // nunca trae null
             'email' => $this->email,
             'password' => $this->password,
             'dni' => $this->dni,
@@ -33,8 +33,8 @@ class UserResource extends JsonResource
             'foto_firma' => $this->foto_firma,
             'foto_perfil' => $this->foto_perfil,
             'foto_huella' => $this->foto_huella,
-            'tipo_usuario' => $this->tipo_usuario, // nunca es null
-            'place_id' => $this->place_id,
+            'tipo_usuario' => $this->tipo_usuario, // nunca trae null
+            'place_id' => $this->place->id ?? null, // para arreglar cuando se usa softDeletes
         ];
     }
 }

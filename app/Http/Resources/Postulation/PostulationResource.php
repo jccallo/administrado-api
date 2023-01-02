@@ -18,8 +18,11 @@ class PostulationResource extends JsonResource
             'id' => $this->id,
             'estado_postulacion' => $this->estado_postulacion,
             'fecha_postulacion' => $this->created_at->format('Y-m-d'),
-            'user_id' => $this->user_id,
-            'vacancy_id' => $this->vacancy_id,
+            'fecha_modificacion' => $this->updated_at->format('Y-m-d'),
+            'user_id' => $this->user->id ?? null,
+            'vacancy_id' => $this->vacancy->id ?? null,
+            'user' => $this->user->name ?? null,
+            'vacancy' => $this->vacancy->nombre ?? null,
         ];
     }
 }

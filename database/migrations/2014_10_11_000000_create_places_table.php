@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
-            $table->timestamps(); // null
+            $table->timestamps();
 
             $table->string('nombre')->unique(); // OBLIGATORIO
             $table->softDeletes(); // null

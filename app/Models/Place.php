@@ -16,7 +16,7 @@ class Place extends Model
         'nombre', // OBLIGATORIO
     ];
 
-    public function users()
+    public function users() // no se usa
     {
         return $this->hasMany(User::class, 'place_id', 'id');
     }

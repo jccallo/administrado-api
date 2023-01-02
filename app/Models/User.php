@@ -110,37 +110,4 @@ class User extends Authenticatable
         return $this->belongsToMany(Bank::class, 'bank_user', 'user_id', 'bank_id')
             ->withPivot('numero_cuenta', 'numero_cuenta_interbancario');
     }
-
-    /* --------------------------------- metodos -------------------------------- */
-
-    // public function getPlaceName()
-    // {
-    //     return isset($this->place) ? $this->place->nombre : null;
-    // }
-
-    // public function getRelationships()
-    // {
-    //     $relationships = collect();
-    //     foreach ($this->relationships as $relationship) {
-    //         $relationships->push([
-    //             'id' => $relationship->id,
-    //             'nombre' => $relationship->nombre,
-    //             'parentesco' => $relationship->pivot->parentesco,
-    //         ]);
-    //     }
-    //     return $relationships->count() > 0 ? $relationships : null;
-    // }
-
-    // public function getRecommenders()
-    // {
-    //     $recommenders = collect();
-    //     foreach ($this->recommenders as $recommender) {
-    //         $recommenders->push([
-    //             'id' => $recommender->id,
-    //             'nombre' => $recommender->nombre,
-    //             'tipo' => $recommender->pivot->tipo,
-    //         ]);
-    //     }
-    //     return $recommenders->count() > 0 ? $recommenders : null;
-    // }
 }

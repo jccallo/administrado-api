@@ -18,9 +18,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('nombre'); // OBLIGATORIO
-            $table->string('telefono')->unique()->nullable();
-            $table->string('direccion')->nullable();
-            $table->string('correo')->unique()->nullable();
+            $table->string('telefono')->unique()->nullable(); // null
+            $table->string('direccion')->nullable(); // null
+            $table->string('correo')->unique()->nullable(); // null
             $table->softDeletes(); // null
         });
     }

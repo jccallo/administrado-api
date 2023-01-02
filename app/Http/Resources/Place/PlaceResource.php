@@ -15,8 +15,8 @@ class PlaceResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'nombre' => $this->nombre,
+            'id' => $this->id, // nunca trae null
+            'nombre' => $this->nombre, // nunca trae null
         ];
     }
 }

@@ -18,7 +18,8 @@ class PostulationController extends ApiController
 
     public function store(PostulationRequest $request)
     {
-        $postulation = Postulation::create($request->all());
+        $validated = $request->validated();
+        $postulation = Postulation::create($validated);
         $data = new PostulationResource($postulation);
         return $data;
     }
@@ -31,7 +32,8 @@ class PostulationController extends ApiController
 
     public function update(PostulationRequest $request, Postulation $postulation)
     {
-        $postulation->update($request->all());
+        $validated = $request->validated();
+        $postulation->update($validated);
         $data = new PostulationResource($postulation);
         return $data;
     }
