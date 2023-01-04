@@ -15,6 +15,10 @@ class PostulationExamController extends ApiController
         return $this->showAll($postulation->exams);
     }
 
+    public function show(Postulation $postulation, Exam $exam) {
+        return $this->showOne($postulation->exams()->find($exam->id));
+    }
+
     public function store(StorePostulationExamRequest $request, Postulation $postulation)
     {
         $validated = $request->validated();

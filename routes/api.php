@@ -58,8 +58,8 @@ Route::apiResource('vacancies', VacancyController::class); // listo
 
 /* postulations */
 Route::apiResource('postulations', PostulationController::class); // listo
-Route::apiResource('postulations.exams', PostulationExamController::class)->except(['show']); // listo
-Route::apiResource('postulations.courses', PostulationCourseController::class)->except(['show']); // listo
+Route::apiResource('postulations.exams', PostulationExamController::class); // listo
+Route::apiResource('postulations.courses', PostulationCourseController::class); // listo
 
 /* examenes */
 Route::apiResource('exams', ExamController::class); // listo

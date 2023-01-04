@@ -43,6 +43,14 @@ trait ApiResponser
         return $this->successResponse($ok, $code);
     }
 
+    protected function showOne(Model $response, $code = 200)
+	{
+        $ok = collect();
+        $ok->put('data', $response);
+
+		return $this->successResponse($ok, $code);
+	}
+
     // /**
     //  * @param Object $response LengthAwarePaginator or Collection object
     //  * @param Array $meta datos adicionales
