@@ -16,7 +16,7 @@ class PostulationCourseController extends ApiController
     }
 
     public function show(Postulation $postulation, Course $course) {
-        return $this->showOne($postulation->courses()->find($course->id));
+        return $this->showOne($postulation->courses()->find($course->id)->pivot);
     }
 
     public function store(StorePostulationCourseRequest $request, Postulation $postulation)

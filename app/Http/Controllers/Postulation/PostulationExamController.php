@@ -16,7 +16,7 @@ class PostulationExamController extends ApiController
     }
 
     public function show(Postulation $postulation, Exam $exam) {
-        return $this->showOne($postulation->exams()->find($exam->id));
+        return $this->showOne($postulation->exams()->find($exam->id)->pivot);
     }
 
     public function store(StorePostulationExamRequest $request, Postulation $postulation)
