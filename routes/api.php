@@ -45,7 +45,7 @@ Route::apiResource('users', UserController::class); // listo
 Route::apiResource('users.relationships',UserRelationshipController::class)->except(['show']); // listo
 Route::apiResource('users.recommenders',UserRecommenderController::class)->except(['show']); // listo
 Route::apiResource('users.callers',UserCallerController::class)->except(['show']); // listo
-Route::apiResource('users.faults',UserFaultController::class)->except(['show']); // listo
+Route::apiResource('users.faults',UserFaultController::class)->except(['show', 'update']); // listo
 Route::apiResource('users.careers',UserCareerController::class)->except(['show']); // listo
 Route::apiResource('users.jobs',UserJobController::class)->except(['show']); // listo
 Route::apiResource('users.banks',UserBankController::class)->except(['show', 'update']); // listo

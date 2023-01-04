@@ -14,12 +14,12 @@ class UserFaultController extends ApiController
         return $this->showAll($user->faults);
     }
 
-    public function update(UserFaultRequest $request, User $user, Fault $fault)
+    public function store(UserFaultRequest $request, User $user)
     {
         $validated = $request->validated();
-        $user->faults()->attach($fault->id, [
+        $user->faults()->attach($validated['id'], [
             'fecha_falta' => $validated['fecha_falta'],
-            'place_id' => $validated['place_id'],
+            'place_id' => $validated['place_id'] ?? null,
         ]);
         return $this->showAll($user->faults);
     }
