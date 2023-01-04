@@ -14,10 +14,10 @@ class UserBankController extends ApiController
         return $this->showAll($user->accounts);
     }
 
-    public function update(UserBankRequest $request, User $user, Bank $bank)
+    public function store(UserBankRequest $request, User $user)
     {
         $validated = $request->validated();
-        $user->accounts()->attach($bank->id, [
+        $user->accounts()->attach($validated['id'], [
             'numero_cuenta' => $validated['numero_cuenta'],
             'numero_cuenta_interbancario' => $validated['numero_cuenta_interbancario'] ?? null,
         ]);

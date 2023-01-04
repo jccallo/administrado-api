@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserBankRequest extends FormRequest
 {
@@ -24,6 +25,7 @@ class UserBankRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => ['required', 'integer', Rule::exists('banks', 'id')],
             'numero_cuenta' => 'required|string',
             'numero_cuenta_interbancario' => 'sometimes|nullable|string',
         ];
