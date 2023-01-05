@@ -27,7 +27,7 @@ class UserFaultRequest extends FormRequest
         return [
             'id' => ['required', 'integer', Rule::exists('faults', 'id')],
             'fecha_falta' => 'required|date',
-            'place_id' => ['required', 'integer', Rule::exists('places', 'id')],
+            'place_id' => ['sometimes', 'nullable', 'integer', Rule::exists('places', 'id')],
         ];
     }
 }

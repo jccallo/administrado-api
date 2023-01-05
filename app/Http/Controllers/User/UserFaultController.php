@@ -5,13 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\User\UserFaultRequest;
 use App\Models\Fault;
+use App\Models\Place;
 use App\Models\User;
 
 class UserFaultController extends ApiController
 {
     public function index(User $user)
     {
-        return $this->showAll($user->faults);
+        return $this->showAll($user->customFaults());
     }
 
     public function store(UserFaultRequest $request, User $user)
@@ -21,7 +22,7 @@ class UserFaultController extends ApiController
             'fecha_falta' => $validated['fecha_falta'],
             'place_id' => $validated['place_id'] ?? null,
         ]);
-        return $this->showAll($user->faults);
+        return $this->showAll($user->customFaults());
     }
 
     public function destroy(User $user, Fault $fault)
@@ -30,6 +31,6 @@ class UserFaultController extends ApiController
             return $this->errorResponse('La falta especificada no esta asignada al usuario', 404);
         }
         $user->faults()->detach($fault->id);
-        return $this->showAll($user->faults);
+        return $this->showAll($user->customFaults());
     }
 }

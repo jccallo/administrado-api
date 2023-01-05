@@ -110,4 +110,17 @@ class User extends Authenticatable
         return $this->belongsToMany(Bank::class, 'bank_user', 'user_id', 'bank_id')
             ->withPivot('numero_cuenta', 'numero_cuenta_interbancario');
     }
+
+    /* ------------------------------- metodos ------------------------------- */
+    public function customFaults() {
+        $faults = collect();
+        foreach ($this->faults as $fault) {
+            $newFault = collect($fault);
+            $place_nombre = Place::find($fault->pivot->place_id) ? Place::find($fault->pivot->place_id)->nombre : null;
+            $newPivot = collect($fault->pivot)->put('place_nombre', $place_nombre);
+            $newFault->put('pivot', $newPivot);
+            $faults->push($newFault);
+        }
+        return $faults;
+    }
 }
