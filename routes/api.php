@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Bank\BankController;
 use App\Http\Controllers\Career\CareerController;
 use App\Http\Controllers\Course\CourseController;
@@ -37,44 +38,54 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-/* places */
-Route::apiResource('places', PlaceController::class); // listo
+/* login */
+Route::post('login', [AuthController::class, 'login']);
 
-/* users */
-Route::apiResource('users', UserController::class); // listo
-Route::apiResource('users.relationships',UserRelationshipController::class)->except(['show']); // listo
-Route::apiResource('users.recommenders',UserRecommenderController::class)->except(['show']); // listo
-Route::apiResource('users.callers',UserCallerController::class)->except(['show']); // listo
-Route::apiResource('users.faults',UserFaultController::class)->except(['show', 'update']); // listo
-Route::apiResource('users.careers',UserCareerController::class)->except(['show']); // listo
-Route::apiResource('users.jobs',UserJobController::class)->except(['show']); // listo
-Route::apiResource('users.banks',UserBankController::class)->except(['show', 'update']); // listo
+/* protegidas */
+Route::middleware(['auth:sanctum'])->group(function () {
+    /* logout */
+    Route::post('logout', [AuthController::class, 'logout']);
 
-/* friends */
-Route::apiResource('friends', FriendController::class); // listo
+    /* places */
+    Route::apiResource('places', PlaceController::class); // listo
 
-/* vacancies */
-Route::apiResource('vacancies', VacancyController::class); // listo
+    /* users */
+    Route::apiResource('users', UserController::class); // listo
+    Route::apiResource('users.relationships', UserRelationshipController::class)->except(['show']); // listo
+    Route::apiResource('users.recommenders', UserRecommenderController::class)->except(['show']); // listo
+    Route::apiResource('users.callers', UserCallerController::class)->except(['show']); // listo
+    Route::apiResource('users.faults', UserFaultController::class)->except(['show', 'update']); // listo
+    Route::apiResource('users.careers', UserCareerController::class)->except(['show']); // listo
+    Route::apiResource('users.jobs', UserJobController::class)->except(['show']); // listo
+    Route::apiResource('users.banks', UserBankController::class)->except(['show', 'update']); // listo
 
-/* postulations */
-Route::apiResource('postulations', PostulationController::class); // listo
-Route::apiResource('postulations.exams', PostulationExamController::class); // listo
-Route::apiResource('postulations.courses', PostulationCourseController::class); // listo
+    /* friends */
+    Route::apiResource('friends', FriendController::class); // listo
 
-/* examenes */
-Route::apiResource('exams', ExamController::class); // listo
+    /* vacancies */
+    Route::apiResource('vacancies', VacancyController::class); // listo
 
-/* courses */
-Route::apiResource('courses', CourseController::class); // listo
+    /* postulations */
+    Route::apiResource('postulations', PostulationController::class); // listo
+    Route::apiResource('postulations.exams', PostulationExamController::class); // listo
+    Route::apiResource('postulations.courses', PostulationCourseController::class); // listo
 
-/* faults */
-Route::apiResource('faults', FaultController::class); // listo
+    /* examenes */
+    Route::apiResource('exams', ExamController::class); // listo
 
-/* careers */
-Route::apiResource('careers', CareerController::class); // listo
+    /* courses */
+    Route::apiResource('courses', CourseController::class); // listo
 
-/* jobs */
-Route::apiResource('jobs', JobController::class); // listo
+    /* faults */
+    Route::apiResource('faults', FaultController::class); // listo
 
-/* banks */
-Route::apiResource('banks', BankController::class); // listo
+    /* careers */
+    Route::apiResource('careers', CareerController::class); // listo
+
+    /* jobs */
+    Route::apiResource('jobs', JobController::class); // listo
+
+    /* banks */
+    Route::apiResource('banks', BankController::class); // listo
+});
+

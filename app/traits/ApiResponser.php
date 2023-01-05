@@ -51,6 +51,13 @@ trait ApiResponser
 		return $this->successResponse($ok, $code);
 	}
 
+    protected function showMessage($message, $code = 200)
+	{
+        $ok = collect();
+        $ok->put('data', $message);
+		return $this->successResponse($ok, $code);
+	}
+
     // /**
     //  * @param Object $response LengthAwarePaginator or Collection object
     //  * @param Array $meta datos adicionales
